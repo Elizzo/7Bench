@@ -22,5 +22,68 @@ We propose an evaluation protocol that builds on existing frameworks by incorpor
 Using 7Bench, we evaluate several state-of-the-art diffusion models, uncovering their respective strengths and limitations across diverse alignment tasks. 
 The benchmark is available at https://github.com/Elizzo/7Bench.
 
-## Code coming soon!
+## Benchmark
 
+| Benchmark | N. samples | N. scenarios | Layout |
+| --- | --- | --- | --- |
+| [7bench.csv](benchmark/7bench.csv) | 224 | 7 | ✔️ |
+
+### Format
+
+The benchmark is distributed as a CSV file with one row per sample, including following columns:
+
+| Column | Optional | Description |
+| --- | --- | --- |
+| `id` | - | Unique identifier for each sample. |
+| `category` | - | One of the seven 7Bench scenarios: object_binding, object_relationship, overlapping_bboxes, small_bboxes, color_binding, attribute_binding and complex_composition.  |
+| `prompt` | - | Full natural-language prompt describing the scene.  |
+| **layout** |
+| `obj1` | - | First object mentioned in the prompt (always present). |
+| `bbox1` | - | Bounding box for `obj1`, formatted as `(x_min, y_min, x_max, y_max)`. Coordinates are in 512x512 space.  |
+| `obj2` | yes | Second object referenced in the prompt.  |
+| `bbox2` | yes | Bounding box for `obj2`. |
+| `obj3` | yes | Third object referenced in the prompt.  |
+| `bbox3` | yes | Bounding box for `obj3`. |
+| `obj4` | yes | Fourth object, used in complex scenarios.  |
+| `bbox4` | yes | Bounding box for `obj4`. |
+
+# Reproducibility
+
+We provide the code for the models we use to generate the images, the images we generated instructing this models with 7Bench prompts and the the code used to evaluate the generated images.
+
+## Models Under Evaluation
+
+| Model |
+| --- |
+| [Stable Diffusion 1.4](https://github.com/davidevezzaro/sd14-test) |
+| [Cross Attention Guidance](https://github.com/davidevezzaro/layout-guidance-test) |
+| [GLIGEN](https://github.com/davidevezzaro/gligen-test) |
+| [BoxDiff](https://github.com/davidevezzaro/boxdiff-test) |
+| [Attention Refocusing](https://github.com/davidevezzaro/attention-refocusing-test) |
+
+## Generated Images
+
+| Images |
+| --- |
+| [7bench-SD14](https://unipdit-my.sharepoint.com/:f:/g/personal/davide_vezzaro_4_studenti_unipd_it/Egdo_40JH1NCuhMuFSkIVYkBtCiodQSYs2t0J5vZjEbyxg?e=ZvYwFu) |
+| [7bench-SD_CAG](https://unipdit-my.sharepoint.com/:f:/g/personal/davide_vezzaro_4_studenti_unipd_it/Egdo_40JH1NCuhMuFSkIVYkBtCiodQSYs2t0J5vZjEbyxg?e=9Yviax) |
+| [7bench-G](https://unipdit-my.sharepoint.com/:f:/g/personal/davide_vezzaro_4_studenti_unipd_it/EmYmCRCH81hNkiMxJ7RTYCUBoNGH5_1xmLf4MxK3M7ExWQ?e=7O1E8H) |
+| [7bench-G_BD](https://unipdit-my.sharepoint.com/:f:/g/personal/davide_vezzaro_4_studenti_unipd_it/EuunPEWMCh9Nq801mBeMYsAB_uy0zWmVcJzHNDV0Ruw54Q?e=fBVnth) |
+| [7bench-G_AR](https://unipdit-my.sharepoint.com/:f:/g/personal/davide_vezzaro_4_studenti_unipd_it/EshO-zqwsVhFgHANisiLA1QBYPxmJC8rghvKNODrdaW_CQ?e=kiPBVC) |
+
+## Evaluation Pipeline
+
+The generated images can evaluated using our pipeline. The source code of the evaluation pipeline for layout-guided models adapated from TIFA can be found at: 
+- [Evaluation Pipeline](https://github.com/davidevezzaro/tifa-test)
+
+## Further Resources
+
+Other resources (e.g. a small prompt collection for testing) can be found [here](https://github.com/davidevezzaro/thesis-resources).
+
+# Citation
+
+If you use 7Bench or any part of this repository in your research, please consider citing our work:
+
+```
+Proceedings coming soon...
+```
